@@ -8,6 +8,6 @@ public:
 	void onCollision(Actor* other) override;
 
 private:
-	int m_health;
+	int m_health = 10;
 };
 

@@ -9,7 +9,7 @@ Maze::Maze(TileKey map[Maze::HEIGHT][Maze::WIDTH])
 		200
 	);
 
-	m_goal = new Goal(0, 0, Maze::TILE_SIZE - 4.0f, 0, 0x00FF00FF);
+	m_goal = new Goal(0, 0, Maze::TILE_SIZE - 2.5f, 0, 0x00FF00FF);
 	//Generate the map
 	generate(map);
 	//Add the player to the scene
@@ -69,9 +69,14 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		m_goal->setWorldPostion(position);
 		addActor(tile.actor);
 		break;
+	case TileKey::SPAWNER:
+		tile.cost = 1.0f;
+		tile.actor = new Spawner(position.x, position.y, (int)0xFF0000FF, m_goal);
+		addActor(tile.actor);
+		break;
 	case TileKey::GHOST:
 		tile.cost = 1.0f;
-		Ghost* ghost = new Ghost(position.x, position.y, 200.0f, 0xFF6666FF, this);
+		Ghost* ghost = new Ghost(position.x, position.y, 100.0f, 0xFF6666FF, this);
 		ghost->setTarget(m_goal);
 		tile.actor = ghost;
 		addActor(tile.actor);

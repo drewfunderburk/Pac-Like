@@ -5,6 +5,7 @@
 #include "Pac.h"
 #include "Ghost.h"
 #include "Goal.h"
+#include "Spawner.h"
 #include <Vector2.h>
 
 /// <summary>
@@ -23,6 +24,7 @@ public:
 		WALL,
 		MUD,
 		GOAL,
+		SPAWNER,
 		GHOST
 	};
 

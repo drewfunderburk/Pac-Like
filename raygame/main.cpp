@@ -37,6 +37,7 @@ int main()
 	Maze::TileKey s = Maze::TileKey::MUD;
 	Maze::TileKey g = Maze::TileKey::GHOST;
 	Maze::TileKey G = Maze::TileKey::GOAL;
+	Maze::TileKey S = Maze::TileKey::SPAWNER;
 
 	// Create the maps
 	Maze::TileKey emptyMap[Maze::HEIGHT][Maze::WIDTH] = {
@@ -75,8 +76,8 @@ int main()
 
 	Maze::TileKey gameMap[Maze::HEIGHT][Maze::WIDTH] = {
 		{ w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w, w },
+		{ w, S, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, S, w },
 		{ w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
-		{ w, _, g, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
 		{ w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
 		{ w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
 		{ w, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, w },
