@@ -2,5 +2,5 @@
 
 MathLibrary::Vector2 SeekPathBehavior::findDestination(Agent* owner)
 {
-	return getTarget()->getWorldPosition();
+	return getTargetPosition();
 }

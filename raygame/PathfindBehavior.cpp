@@ -4,7 +4,7 @@
 void PathfindBehavior::update(Agent* owner, float deltaTime)
 {
 	//Don't update if disabled or no target
-	if (!getEnabled() || !m_target)
+	if (!getEnabled() || m_targetPosition == MathLibrary::Vector2(0, 0))
 		return;
 
 	//Find the positions and tiles of the owner and target
@@ -27,7 +27,7 @@ void PathfindBehavior::update(Agent* owner, float deltaTime)
 	if (ownerTile.x == nextTile.x && ownerTile.y == nextTile.y) {
 		if (!m_path.empty())
 			m_path.pop_front();
-		m_needPath = true;
+		// m_needPath = true;
 	}
 
 	//Find the direction
@@ -53,7 +53,7 @@ void PathfindBehavior::draw(Agent* owner)
 
 void PathfindBehavior::updatePath(Agent* owner)
 {
-	updatePath(owner, m_target->getWorldPosition());
+	updatePath(owner, m_targetPosition);
 }
 
 void PathfindBehavior::updatePath(Agent* owner, MathLibrary::Vector2 destination)
