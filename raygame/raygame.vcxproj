@@ -167,6 +167,7 @@
     <ClCompile Include="Behavior.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Goal.cpp" />
     <ClCompile Include="KeyboardBehavior.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Behavior.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="Goal.h" />
     <ClInclude Include="KeyboardBehavior.h" />
     <ClInclude Include="Maze.h" />
     <ClInclude Include="NodeGraph.h" />

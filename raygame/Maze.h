@@ -4,6 +4,7 @@
 #include "Wall.h"
 #include "Pac.h"
 #include "Ghost.h"
+#include "Goal.h"
 #include <Vector2.h>
 
 /// <summary>
@@ -21,6 +22,7 @@ public:
 		OPEN,
 		WALL,
 		MUD,
+		GOAL,
 		GHOST
 	};
 
@@ -86,4 +88,5 @@ private:
 	Tile m_grid[WIDTH][HEIGHT];
 
 	Pac* m_player;
+	Goal* m_goal = nullptr;
 };
