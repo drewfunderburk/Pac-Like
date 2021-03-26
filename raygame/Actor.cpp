@@ -164,6 +164,9 @@ void Actor::lookAt(MathLibrary::Vector2 position)
 
 bool Actor::checkCollision(Actor* other)
 {
+    if (!other)
+        return false;
+
     float distance = (other->getWorldPosition() - getWorldPosition()).getMagnitude();
     return distance <= m_collisionRadius + other->m_collisionRadius;
 }

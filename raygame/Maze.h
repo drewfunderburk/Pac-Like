@@ -4,6 +4,8 @@
 #include "Wall.h"
 #include "Pac.h"
 #include "Ghost.h"
+#include "Goal.h"
+#include "Spawner.h"
 #include <Vector2.h>
 
 /// <summary>
@@ -21,6 +23,8 @@ public:
 		OPEN,
 		WALL,
 		MUD,
+		GOAL,
+		SPAWNER,
 		GHOST
 	};
 
@@ -66,6 +70,10 @@ public:
 	/// <returns>A Vector2 with the position of the tile</returns>
 	MathLibrary::Vector2 getPosition(Tile tile);
 
+	/// <summary>
+	/// Get the player's position
+	/// </summary>
+	MathLibrary::Vector2 getPlayerPosition() { return m_player->getWorldPosition(); }
 protected:
 	/// <summary>
 	/// Create a tile from a given key. If an actor is created, it is added to the scene.
@@ -86,4 +94,5 @@ private:
 	Tile m_grid[WIDTH][HEIGHT];
 
 	Pac* m_player;
+	Goal* m_goal = nullptr;
 };

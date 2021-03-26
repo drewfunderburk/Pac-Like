@@ -6,8 +6,10 @@ Maze::Maze(TileKey map[Maze::HEIGHT][Maze::WIDTH])
 	m_player = new Pac(
 		WIDTH / 2 * TILE_SIZE + (TILE_SIZE / 2),
 		HEIGHT / 2 * TILE_SIZE + (TILE_SIZE / 2),
-		200
+		300
 	);
+
+	m_goal = new Goal(0, 0, Maze::TILE_SIZE - 2.5f, 0, 0x00FF00FF);
 	//Generate the map
 	generate(map);
 	//Add the player to the scene
@@ -35,10 +37,24 @@ Maze::Tile Maze::getTile(MathLibrary::Vector2 position)
 {
 	int x = (int)(position.x / TILE_SIZE);
 	int y = (int)(position.y / TILE_SIZE);
+
+	if (x < 0)
+		x = 0;
+	else if (x >= Maze::WIDTH)
+		x = Maze::WIDTH - 1;
+	if (y < 0)
+		y = 0;
+	else if (y >= Maze::HEIGHT)
+		y = Maze::HEIGHT - 1;
+
+	return m_grid[x][y];
+
+	/* UNINTENDED BEHAVIOR
 	if (x >= 0 && x < Maze::WIDTH && y >= 0 && y < Maze::HEIGHT)
 		return m_grid[x][y];
 	else
 		return m_grid[0][0];
+	*/
 }
 
 MathLibrary::Vector2 Maze::getPosition(Tile tile)
@@ -61,10 +77,21 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		tile.actor = new Wall(position.x, position.y);
 		addActor(tile.actor);
 		break;
+	case TileKey::GOAL:
+		tile.cost = 0.0f;
+		tile.actor = m_goal;
+		m_goal->setWorldPostion(position);
+		addActor(tile.actor);
+		break;
+	case TileKey::SPAWNER:
+		tile.cost = 1.0f;
+		tile.actor = new Spawner(position.x, position.y, (int)0xFF0000FF, (rand() % 5) + 5, m_goal);
+		addActor(tile.actor);
+		break;
 	case TileKey::GHOST:
 		tile.cost = 1.0f;
-		Ghost* ghost = new Ghost(position.x, position.y, 200.0f, 0xFF6666FF, this);
-		ghost->setTarget(m_player);
+		Ghost* ghost = new Ghost(position.x, position.y, 250.0f, 0xFF6666FF, m_goal->getWorldPosition(), this);
+		ghost->setTargetPosition(m_goal->getWorldPosition());
 		tile.actor = ghost;
 		addActor(tile.actor);
 		break;

@@ -97,5 +97,5 @@ private:
     Camera2D* m_camera;
 	std::vector<Scene*> m_scenes;
     bool m_gameOver = false;
-    int m_currentSceneIndex = 0;
+    int m_currentSceneIndex;
 };

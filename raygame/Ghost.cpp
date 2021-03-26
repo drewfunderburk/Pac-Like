@@ -1,20 +1,27 @@
 #include "Ghost.h"
+#include "Pac.h"
 #include "Maze.h"
 #include "Wall.h"
+#include "SeePlayerDecision.h"
+#include "Game.h"
 #include "raylib.h"
 
-Ghost::Ghost(float x, float y, float maxSpeed, int color, Maze* maze)
-	: Agent(x, y, Maze::TILE_SIZE / 2.5f, maxSpeed, maxSpeed, color)
+Ghost::Ghost(float x, float y, float maxSpeed, int color, MathLibrary::Vector2 goalPosition, Maze* maze)
+	: Agent(x, y, Maze::TILE_SIZE / 2.5f - 1, maxSpeed, maxSpeed, color)
 {
 	m_maze = maze;
+	m_goalPosition = goalPosition;
 	m_pathfindBehavior = new SeekPathBehavior(maze);
+	m_seePlayerDecision = new SeePlayerDecision(m_pathfindBehavior,m_goalPosition, 100);
 	m_pathfindBehavior->setColor(color);
 	addBehavior(m_pathfindBehavior);
+	addBehavior(m_seePlayerDecision);
 }
 
 Ghost::~Ghost()
 {
 	delete m_pathfindBehavior;
+	delete m_seePlayerDecision;
 }
 
 void Ghost::update(float deltaTime)
@@ -43,15 +50,26 @@ void Ghost::onCollision(Actor* other)
 
 		setVelocity({ 0, 0 });
 	}
+
+	// If the enemy collided with the player, destroy it
+	if (Pac* pac = dynamic_cast<Pac*>(other))
+	{
+		Game::getInstance()->destroy(this);
+	}
 }
 
-void Ghost::setTarget(Actor* target)
+void Ghost::setTargetPosition(MathLibrary::Vector2 target)
 {
-	m_target = target;
+	m_targetPosition = target;
 	m_pathfindBehavior->setTarget(target);
 }
 
-Actor* Ghost::getTarget()
+MathLibrary::Vector2 Ghost::getPlayerPosition()
 {
-	return m_target;
+	return m_maze->getPlayerPosition();
+}
+
+MathLibrary::Vector2 Ghost::getTargetPosition()
+{
+	return m_targetPosition;
 }
