@@ -10,7 +10,8 @@ public:
 
 private:
 	float m_timer = 0;
-	float m_spawnDelay = 3;
+	float m_spawnDelay = 5;
+	MathLibrary::Vector2 m_goalPosition;
 	Actor* m_target;
 };
 

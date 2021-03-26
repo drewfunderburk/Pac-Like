@@ -4,12 +4,17 @@
 
 void KeyboardBehavior::update(Agent* owner, float deltaTime)
 {
+    MathLibrary::Vector2 direction = MathLibrary::Vector2();
+
+    owner->setVelocity({ 0, 0 });
     if (IsKeyDown(KEY_W))
-        owner->setVelocity({ 0.0f, -m_speedIncrement });
+        direction.y = -1;
     if (IsKeyDown(KEY_S))
-        owner->setVelocity({ 0.0f, m_speedIncrement });
+        direction.y = 1;
     if (IsKeyDown(KEY_A))
-        owner->setVelocity({ -m_speedIncrement, 0.0f });
+        direction.x = -1;
     if (IsKeyDown(KEY_D))
-        owner->setVelocity({ m_speedIncrement, 0.0f });
+        direction.x = 1;
+
+    owner->setVelocity(direction * m_speedIncrement);
 }

@@ -70,6 +70,10 @@ public:
 	/// <returns>A Vector2 with the position of the tile</returns>
 	MathLibrary::Vector2 getPosition(Tile tile);
 
+	/// <summary>
+	/// Get the player's position
+	/// </summary>
+	MathLibrary::Vector2 getPlayerPosition() { return m_player->getWorldPosition(); }
 protected:
 	/// <summary>
 	/// Create a tile from a given key. If an actor is created, it is added to the scene.

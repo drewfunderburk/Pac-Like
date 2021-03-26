@@ -178,6 +178,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeekBehavior.cpp" />
     <ClCompile Include="SeekPathBehavior.cpp" />
+    <ClCompile Include="SeePlayerDecision.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SeekBehavior.h" />
     <ClInclude Include="SeekPathBehavior.h" />
+    <ClInclude Include="SeePlayerDecision.h" />
     <ClInclude Include="Spawner.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Wall.h" />

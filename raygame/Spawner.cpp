@@ -31,8 +31,9 @@ void Spawner::update(float deltaTime)
 		{
 			MathLibrary::Vector2 position = getWorldPosition();
 			// Add a new ghosty boi
-			Ghost* enemy = new Ghost(position.x, position.y, 100, 0xFF0000FF, maze);
-			enemy->setTarget(m_target);
+			Ghost* enemy = new Ghost(position.x, position.y, 50, 0xFF0000FF, m_target->getWorldPosition(), maze);
+			enemy->setTargetPosition(m_target->getWorldPosition());
+			enemy->setGoalPosition(m_target->getWorldPosition());
 			maze->addActor(enemy);
 		}
 	}

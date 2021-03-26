@@ -5,6 +5,7 @@ class Goal : public Actor
 public:
 	using Actor::Actor;
 
+	void draw() override;
 	void onCollision(Actor* other) override;
 
 private:
