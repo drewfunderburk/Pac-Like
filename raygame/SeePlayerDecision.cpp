@@ -105,15 +105,26 @@ MathLibrary::Vector2 SeePlayerDecision::findCorner(Agent* owner)
 	// Store player position
 	MathLibrary::Vector2 playerPosition = ghost->getPlayerPosition();
 
-	// If the player is closer to the first corner return the second corner, otherwise return the first corner
-	if ((playerPosition - corners[adjacentCorners[0]]).getMagnitude() < (playerPosition - corners[adjacentCorners[1]]).getMagnitude())
-	{
-		std::cout << "Fleeing to corner: " << corners[adjacentCorners[1]].x << ", " << corners[adjacentCorners[1]].y << std::endl;
-		return corners[adjacentCorners[1]];
-	}
-	else
-	{
-		std::cout << "Fleeing to corner: " << corners[adjacentCorners[0]].x << ", " << corners[adjacentCorners[0]].y << std::endl;
+	// Store the direction from the enemy to the player
+	MathLibrary::Vector2 directionToPlayer = (owner->getWorldPosition() - playerPosition).getNormalized();
+
+	// Store the direction from the enemy to the first adjacent corner
+	MathLibrary::Vector2 directionToCorner0 = (owner->getWorldPosition() - corners[adjacentCorners[0]]).getNormalized();
+
+	// Store the direction from the enemy to the second adjacent corner
+	MathLibrary::Vector2 directionToCorner1 = (owner->getWorldPosition() - corners[adjacentCorners[1]]).getNormalized();
+
+	// Store the dotproduct of the direction to the player and the direction to the first corner
+	float dotProduct0 = MathLibrary::Vector2::dotProduct(directionToPlayer, directionToCorner0);
+
+	// Store the dotproduct of the direction to the player and the direction to the second corner
+	float dotProduct1 = MathLibrary::Vector2::dotProduct(directionToPlayer, directionToCorner1);
+
+	// Compare the two dotproducts. 
+	// If the first is less than the second, then there is more room to run in that direction.
+	// Flee towards that corner
+	if (dotProduct0 < dotProduct1)
 		return corners[adjacentCorners[0]];
-	}
+	else
+		return corners[adjacentCorners[1]];
 }
