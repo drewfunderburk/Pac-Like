@@ -4,9 +4,10 @@
 #include "Maze.h"
 #include "raylib.h"
 
-Spawner::Spawner(int x, int y, int color, Actor* target) :
+Spawner::Spawner(int x, int y, int color, float spawnDelay, Actor* target) :
 	Actor(x, y, 10, 0, (int)0xFF0000FF)
 {
+	m_spawnDelay = spawnDelay;
 	m_target = target;
 }
 
@@ -31,7 +32,7 @@ void Spawner::update(float deltaTime)
 		{
 			MathLibrary::Vector2 position = getWorldPosition();
 			// Add a new ghosty boi
-			Ghost* enemy = new Ghost(position.x, position.y, 50, 0xFF0000FF, m_target->getWorldPosition(), maze);
+			Ghost* enemy = new Ghost(position.x, position.y, 200.0f, 0xFF0000FF, m_target->getWorldPosition(), maze);
 			enemy->setTargetPosition(m_target->getWorldPosition());
 			enemy->setGoalPosition(m_target->getWorldPosition());
 			maze->addActor(enemy);

@@ -85,12 +85,12 @@ Maze::Tile Maze::createTile(int x, int y, TileKey key)
 		break;
 	case TileKey::SPAWNER:
 		tile.cost = 1.0f;
-		tile.actor = new Spawner(position.x, position.y, (int)0xFF0000FF, m_goal);
+		tile.actor = new Spawner(position.x, position.y, (int)0xFF0000FF, (rand() % 5) + 5, m_goal);
 		addActor(tile.actor);
 		break;
 	case TileKey::GHOST:
 		tile.cost = 1.0f;
-		Ghost* ghost = new Ghost(position.x, position.y, 100.0f, 0xFF6666FF, m_goal->getWorldPosition(), this);
+		Ghost* ghost = new Ghost(position.x, position.y, 250.0f, 0xFF6666FF, m_goal->getWorldPosition(), this);
 		ghost->setTargetPosition(m_goal->getWorldPosition());
 		tile.actor = ghost;
 		addActor(tile.actor);
