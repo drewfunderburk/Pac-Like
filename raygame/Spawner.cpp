@@ -27,7 +27,7 @@ void Spawner::update(float deltaTime)
 		// Reset timer
 		m_timer = 0;
 
-		// Check if the current scene is a maze
+		// Check if the current scene is a maze and get a reference to it
 		if (Maze* maze = dynamic_cast<Maze*>(Game::getInstance()->getCurrentScene()))
 		{
 			MathLibrary::Vector2 position = getWorldPosition();

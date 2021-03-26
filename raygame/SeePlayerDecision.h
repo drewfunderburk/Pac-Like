@@ -16,7 +16,18 @@ public:
 	void update(Agent* owner, float deltaTime) override;
 
 private:
+	/// <summary>
+	/// Returns whether the player can be seen based on its given vision distance
+	/// </summary>
+	/// <param name="owner"></param>
+	/// <returns></returns>
 	bool canSeePlayer(Agent* owner);
+
+	/// <summary>
+	/// Returns the best adjacent corner to flee to based on the player's location
+	/// </summary>
+	/// <param name="owner"></param>
+	/// <returns></returns>
 	MathLibrary::Vector2 findCorner(Agent* owner);
 
 private:

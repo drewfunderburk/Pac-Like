@@ -51,6 +51,7 @@ void Ghost::onCollision(Actor* other)
 		setVelocity({ 0, 0 });
 	}
 
+	// If the enemy collided with the player, destroy it
 	if (Pac* pac = dynamic_cast<Pac*>(other))
 	{
 		Game::getInstance()->destroy(this);
